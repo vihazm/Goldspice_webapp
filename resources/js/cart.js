@@ -1,6 +1,3 @@
-// Shared cart functionality for GoldSpice website
-// This file provides common cart operations across all pages
-
 class GoldSpiceCart {
     constructor() {
         this.cart = [];
