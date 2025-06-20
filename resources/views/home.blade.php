@@ -7,9 +7,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
-      --yellow: #ffee39;
+      --yellow:rgb(255, 245, 139);
       --emerald: #44b180;
-      --tumeric: #d29119;
+      --tumeric:rgb(220, 158, 43);
       --grey:#efecec;
       --grey2:#6c6c6c;
       --red:#ca0000;
@@ -47,22 +47,31 @@
     </div>
   </nav>
 
-  <!-- Main content starts -->
-  <div class="relative z-10 w-full overflow-hidden">
+  <!-- Main content -->
+  <div class="relative z-10 w-full py-overflow-hidden">
 
     <section class="relative z-10 flex flex-col lg:flex-row items-center justify-between px-4 lg:px-24 py-20 gap-16">
       <div class="relative z-10 flex-1 text-center lg:text-left">
-        <h1 class="font-serif text-5xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+        <h1 class="font-serif text-7xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
           Experience <span class="text-[var(--tumeric)]">True Ceylon Spices</span>
         </h1>
-        <p class="text-gray-200 text-2xl mb-10 max-w-2xl mx-auto lg:mx-0">
-          Handpicked in the heart of Sri Lanka, processed and delivered to your table with love.
-        </p>
-        <a href="{{ url('/products') }}" class="inline-block bg-[var(--tumeric)] text-black text-xl font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-[var(--emerald)] hover:text-white transition transition-transform transform hover:scale-105 duration-300">Shop Now</a>
+        <p class="text-white text-2xl mb-10 max-w-3xl mx-auto lg:mx-0">Handpicked by our local farmers in the heart of Sri Lanka, processed and delivered to your table with great love and care.</p><br>
+        <p class="text-xl text-[var(--yellow)] font-bold my-4">Taste the Tradition with Goldspice!</p>
+        <a href="{{ url('/products') }}" class="inline-block bg-[var(--tumeric)] text-black text-xl font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-[var(--yellow)] hover:text-black transition transition-transform transform hover:scale-105 duration-300">Shop Now</a>
       </div>
+
+      <!--scroll down notice button-->
+      <button 
+      onclick="document.getElementById('features-section').scrollIntoView({ behavior: 'smooth' });"
+      class="absolute right-10 top-[90%] transform translate-y-1/2 bg-white/10 border border-white/20 backdrop-blur-lg p-3 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+      </button>
     </section>
 
-    <section class="relative z-10 py-12 px-4">
+    <!--linking cards-->
+    <section class="relative z-10 py-28 px-4">
       <div class="relative z-10 max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
 
         <div class="bg-white border-4 border-[var(--tumeric)] rounded-2xl p-8 shadow-lg flex flex-col text-left transition-transform transform hover:scale-105 duration-300">
@@ -85,9 +94,9 @@
       </div>
     </section>
 
-  </div> <!-- properly closed the content container -->
+  </div> 
 
-  <!-- Sections with light background fixed -->
+  <!-- info sections -->
   <section class="py-16 px-6 bg-[var(--grey)] text-black relative z-10">
     <div class="max-w-5xl mx-auto flex flex-col items-center">
       <h2 class="text-2xl sm:text-4xl font-bold mb-10 text-[var(--emerald)] py-4">What Makes GoldSpice Special?</h2>
