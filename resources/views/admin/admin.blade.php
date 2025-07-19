@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GoldSpice - Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --yellow: #ffee39;
+      --yellowdark: #ffcc00dc;
+      --yellow2: #fff9a9;
+      --emerald: #44b180;
+      --emerald2: #b7ffbb;
+      --tumeric: #c58610;
+      --green2: #36996e;
+      --grey2: #555;
+    }
+
+    body {
+      font-family: 'Merriweather', serif;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:700,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+    <!-- Full-page background with overlay -->
+  <div class="fixed inset-0 z-0">
+    <img src="{{ asset('images/spicespoons4.jpg') }}" class="w-full h-full object-cover opacity-90" alt="Spice Background" />
+    <div class="absolute inset-0 bg-black/60"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 flex justify-between items-center px-8 py-6 bg-black/30 backdrop-blur-md">
+    <div class="flex items-center space-x-3">
+      <img src="{{ asset('images/GoldSpice4.png') }}" alt="Logo" class="w-14 h-14 sm:w-16 sm:h-16" />
+      <span class="text-white text-2xl sm:text-3xl tracking-wider font-serif font-bold">𝕲𝖔𝖑𝖉𝕾𝖕𝖎𝖈𝖊</span>
+    </div>
+    <div class="flex space-x-6 text-sm text-white uppercase">
+      <a href="{{ url('/home') }}" class="w-14 h-14 rounded-full bg-white overflow-hidden hover:bg-[var(--emerald)] hover:text-white transition transition-transform transform hover:scale-105 duration-300">
+        <img src = "{{ asset('images/homeicon.png') }}" class = "w-full h-full object-cover">
+      </a>
+      
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="relative z-10 flex-1 px-6 py-10 max-w-7xl mx-auto font-serif">
+
+    <h1 class="text-5xl font-bold text-[var(--yellowdark)] mb-8">Admin Dashboard</h1>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition transform hover:scale-105 duration-300">
+        <h2 class="text-xl font-semibold text-[var(--emerald)] mb-2">Sales for the month</h2>
+        <p class="text-3xl font-bold">Rs. 120,000</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition transform hover:scale-105 duration-300">
+        <h2 class="text-xl font-semibold text-[var(--emerald)] mb-2">New Orders</h2>
+        <p class="text-3xl font-bold">32</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition transform hover:scale-105 duration-300">
+        <h2 class="text-xl font-semibold text-[var(--emerald)] mb-2">Registered Users</h2>
+        <p class="text-3xl font-bold">248</p>
+      </div>
+    </div>
+
+    <!-- Management Sections -->
+    <div class="grid md:grid-cols-2 gap-10 mb-10">
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h3 class="text-2xl font-bold text-[var(--tumeric)] mb-4">Product Management</h3>
+        <ul class="space-y-2 text-[var(--grey2)]">
+          <li>- Add new products</li>
+          <li>- Edit or delete existing products</li>
+          <li>- Manage categories and collections</li>
+        </ul>
+        <a href="#" class="inline-block mt-4 bg-[var(--emerald)] text-white px-4 py-2 rounded hover:bg-[var(--green2)] transition">Go to Products</a>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h3 class="text-2xl font-bold text-[var(--tumeric)] mb-4">Order Management</h3>
+        <ul class="space-y-2 text-[var(--grey2)]">
+          <li>- View and update order status</li>
+          <li>- Process return requests</li>
+          <li>- Print invoices or receipts</li>
+        </ul>
+        <a href="#" class="inline-block mt-4 bg-[var(--emerald)] text-white px-4 py-2 rounded hover:bg-[var(--green2)] transition">Manage Orders</a>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h3 class="text-2xl font-bold text-[var(--tumeric)] mb-4">User Management</h3>
+        <ul class="space-y-2 text-[var(--grey2)]">
+          <li>- View user accounts</li>
+          <li>- Ban or promote users</li>
+          <li>- Assign roles (buyer, admin, seller)</li>
+        </ul>
+        <a href="#" class="inline-block mt-4 bg-[var(--emerald)] text-white px-4 py-2 rounded hover:bg-[var(--green2)] transition">Manage Users</a>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h3 class="text-2xl font-bold text-[var(--tumeric)] mb-4">Review Moderation</h3>
+        <ul class="space-y-2 text-[var(--grey2)]">
+          <li>- Approve or delete product reviews</li>
+          <li>- Flag spam or abusive content</li>
+        </ul>
+        <a href="#" class="inline-block mt-4 bg-[var(--emerald)] text-white px-4 py-2 rounded hover:bg-[var(--green2)] transition">Moderate Reviews</a>
+      </div>
+    </div>
+
+    <!-- Sales details -->
+    
+    <div class="bg-white p-6 rounded-xl shadow mb-8">
+    <h3 class="text-3xl font-bold text-[var(--emerald)] mb-4">Sales Overview</h3>
+    <canvas id="salesChart" height="100"></canvas>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative bg-black border-t border-gray-800 text-gray-400 text-xs sm:text-sm py-6 px-4 sm:px-8">
+    <div class="absolute inset-0">
+        <img src="{{ asset('images/pepper.jpg') }}" class="w-full h-full object-cover opacity-40" alt="Pepper Background" />
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+        <div class="flex flex-col items-center sm:items-start space-y-2">
+            <div class="flex items-center space-x-3">
+                <img src="{{ asset('images/Goldspice4.png') }}" alt="GoldSpice Logo" class="my-8 w-16 h-16" />
+                <span class="text-white text-lg font-semibold">GoldSpice</span>
+            </div>
+            <div class="mt-2 text-left">
+                <div class="my-1">
+                    <span class="ml-1 text-md text-white font-semibold">+94 71 123 4567 / +94 77 987 6543</span>
+                </div>
+
+                <div class="my-2">
+                    <span class="ml-1 text-md text-white font-semibold">info@goldspice.com</span>
+                </div>
+
+                <div class="my-2">
+                    <span class="ml-1 text-md text-white font-semibold">No. 25, Spice Street, Colombo 07, Sri Lanka</span>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-white text-lg font-bold">&copy; 2025 GoldSpice. Made in SL.</p>
+
+        <div class="flex space-x-4 items-center">
+            <p class="my-3 text-white font-semibold">Follow us on: </p>
+            <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook" class="hover:text-[var(--tumeric)] transition">
+                <svg fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
+                    <path d="M22 12a10 10 0 10-11.5 9.95v-7.05H8v-2.9h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6v2H17l-.3 2.9h-2.5V22A10 10 0 0022 12z" />
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="hover:text-[var(--tumeric)] transition">
+                <svg fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
+                    <path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 2 .3 2.5.5.6.2 1.1.5 1.6 1 .5.5.8 1 .9 1.6.2.5.4 1.3.5 2.5.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.3 2-.5 2.5-.2.6-.5 1.1-1 1.6s-1 .8-1.6.9c-.5.2-1.3.4-2.5.5-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-2-.3-2.5-.5-.6-.2-1.1-.5-1.6-1-.5-.5-.8-1-.9-1.6-.2-.5-.4-1.3-.5-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.3-2 .5-2.5.2-.6.5-1.1 1-1.6s1-.8 1.6-.9c.5-.2 1.3-.4 2.5-.5C8.4 2.2 8.8 2.2 12 2.2zm0-2.2C8.7 0 8.3 0 7.1.1c-1.3.1-2.3.3-3.1.6a5.97 5.97 0 00-2.1 1.4 6 6 0 00-1.4 2.1C.3 5 0 6 .1 7.1.2 8.3.2 8.7.2 12s0 3.7.1 4.9c.1 1.1.3 2.1.6 3 .3.9.7 1.6 1.4 2.1a6 6 0 002.1 1.4c.9.3 1.9.5 3 .6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.1-.1 2.1-.3 3-.6a5.97 5.97 0 002.1-1.4 6 6 0 001.4-2.1c.3-.9.5-1.9.6-3 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.1-.3-2.1-.6-3a5.97 5.97 0 00-1.4-2.1 6 6 0 00-2.1-1.4c-.9-.3-1.9-.5-3-.6C15.7 0 15.3 0 12 0zM12 5.8A6.2 6.2 0 1012 18a6.2 6.2 0 000-12.2zm0 10.2a4 4 0 110-8 4 4 0 010 8zm6.4-10.9a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- Sales chart JS -->
+  <script>
+  const ctx = document.getElementById('salesChart').getContext('2d');
+  const salesChart = new Chart(ctx, {
+    type: 'bar', // change to 'line', 'pie' etc. if needed
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+      datasets: [{
+        label: 'Monthly Sales (Rs.)',
+        data: [12000, 19000, 3000, 5000, 22000],
+        backgroundColor: 'rgba(197, 134, 16, 0.7)', // tumeric color
+        borderColor: 'rgba(197, 134, 16, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
