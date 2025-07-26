@@ -8,6 +8,7 @@
   <style>
     :root {
       --yellow:rgb(255, 245, 139);
+      --yellowdark: #ffdc4fdc;
       --emerald: #44b180;
       --tumeric:rgb(220, 158, 43);
       --grey:#efecec;
@@ -38,12 +39,10 @@
       <span class="text-2xl sm:text-3xl tracking-wider font-serif font-bold">𝕲𝖔𝖑𝖉𝕾𝖕𝖎𝖈𝖊</span>
     </div>
     <div class="flex space-x-6 text-sm uppercase">
-      <a href="{{ url('/home') }}" class="font-bold hover:text-[var(--emerald)] my-5">Home</a>
+      <a href="{{ url('/') }}" class="font-bold hover:text-[var(--emerald)] my-5">Home</a>
       <a href="{{ url('/about') }}" class="font-bold hover:text-[var(--emerald)] my-5">About</a>
       <a href="{{ url('/products') }}" class="font-bold hover:text-[var(--emerald)] my-5">Products</a>
-      <a href="{{ url('/login') }}" class="w-16 h-16 rounded-full border-2 border-[var(--tumeric)] overflow-hidden hover:border-[var(--emerald)] transition-colors duration-300 transition-transform transform hover:scale-105 duration-300">
-          <img src="{{ asset('images/loginuser.png') }}" alt="Login" class="w-full h-full object-cover" />
-      </a>
+      <a href="{{ url('/login') }}" class="inline-block bg-white border-2 border-[var(--emerald)] font-bold text-[var(--emerald)] px-4 py-3 mx-2 my-2 rounded hover:bg-[var(--yellowdark)] hover:text-black hover:border-black transition transition-transform transform hover:scale-105 duration-300">Login</a>
     </div>
   </nav>
 
@@ -77,7 +76,7 @@
         <div class="bg-white border-4 border-[var(--tumeric)] rounded-2xl p-8 shadow-lg flex flex-col text-left transition-transform transform hover:scale-105 duration-300">
           <h3 class="text-2xl font-serif font-bold mb-3 text-[var(--tumeric)]">Join as a Goldspice member</h3>
           <p class="text-black mb-4">Sign up as a member to purchase, access your own cart and many more!</p>
-          <a href="{{ url('/login') }}" class="inline-block bg-[var(--tumeric)] text-black text-md font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-[var(--emerald)] hover:text-white transition transition-transform transform hover:scale-105 duration-300">Go to Sign-Up →</a>
+          <a href="{{ url('/register') }}" class="inline-block bg-[var(--tumeric)] text-black text-md font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-[var(--emerald)] hover:text-white transition transition-transform transform hover:scale-105 duration-300">Register →</a>
         </div>
 
         <div class="bg-white border-4 border-[var(--tumeric)] rounded-2xl p-8 shadow-lg flex flex-col text-left transition-transform transform hover:scale-105 duration-300">

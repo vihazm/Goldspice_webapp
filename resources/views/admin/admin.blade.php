@@ -8,13 +8,15 @@
   <style>
     :root {
       --yellow: #ffee39;
-      --yellowdark: #ffcc00dc;
+      --yellowdark: #ffdc4fdc;
       --yellow2: #fff9a9;
       --emerald: #44b180;
       --emerald2: #b7ffbb;
       --tumeric: #c58610;
       --green2: #36996e;
       --grey2: #555;
+      --red1:#ba0505;
+      --red2:#6f0404;
     }
 
     body {
@@ -33,23 +35,41 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="sticky top-0 z-50 flex justify-between items-center px-8 py-6 bg-black/30 backdrop-blur-md">
-    <div class="flex items-center space-x-3">
-      <img src="{{ asset('images/GoldSpice4.png') }}" alt="Logo" class="w-14 h-14 sm:w-16 sm:h-16" />
-      <span class="text-white text-2xl sm:text-3xl tracking-wider font-serif font-bold">𝕲𝖔𝖑𝖉𝕾𝖕𝖎𝖈𝖊</span>
+ <nav class="sticky top-0 z-50 flex justify-between items-center px-8 py-6 bg-black/30 backdrop-blur-md">
+  <div class="flex items-center space-x-3">
+    <img src="{{ asset('images/GoldSpice4.png') }}" alt="Logo" class="w-14 h-14 sm:w-16 sm:h-16" />
+    <span class="text-white text-2xl sm:text-3xl tracking-wider font-serif font-bold">𝕲𝖔𝖑𝖉𝕾𝖕𝖎𝖈𝖊</span>
+  </div>
+
+  <div class="flex space-x-6 text-sm text-white uppercase">
+    <div class="relative">
+      <input type="checkbox" id="manageDropdownToggle" class="hidden peer">
+
+      <label for="manageDropdownToggle" class="text-white font-bold hover:text-gray-300 cursor-pointer focus:outline-none py-2 px-3 rounded inline-block transition transform hover:scale-105 duration-300">
+        Users <span class="ml-1 text-xs">&#9660;</span> </label>
+
+      <div class="absolute hidden peer-checked:block bg-gray-700 text-white rounded shadow-lg top-full left-0 min-w-[160px] py-2 mt-2 z-10">
+        <ul class="list-none p-0 m-0">
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 normal-case">View Users</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 normal-case">User Roles</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 normal-case">Permissions</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="flex space-x-6 text-sm text-white uppercase">
-      <a href="{{ url('/home') }}" class="w-14 h-14 rounded-full bg-white overflow-hidden hover:bg-[var(--emerald)] hover:text-white transition transition-transform transform hover:scale-105 duration-300">
-        <img src = "{{ asset('images/homeicon.png') }}" class = "w-full h-full object-cover">
-      </a>
-      
-    </div>
-  </nav>
+
+    <form method="POST" action="{{ route('logout')}}">
+      @csrf
+      <button type="submit" class="inline-block bg-[var(--red1)] text-white px-4 py-2 rounded transition transform hover:scale-105 duration-300">
+        Logout
+      </button>
+    </form>
+  </div>
+</nav>
 
   <!-- Main Content -->
   <main class="relative z-10 flex-1 px-6 py-10 max-w-7xl mx-auto font-serif">
 
-    <h1 class="text-5xl font-bold text-[var(--yellowdark)] mb-8">Admin Dashboard</h1>
+    <h1 class="text-5xl font-bold text-[var(--yellowdark)] mb-8">Welcome Admin!</h1>
 
     <!-- Stats -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -59,62 +79,42 @@
       </div>
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition transform hover:scale-105 duration-300">
         <h2 class="text-xl font-semibold text-[var(--emerald)] mb-2">New Orders</h2>
-        <p class="text-3xl font-bold">32</p>
+        <p class="text-3xl font-bold">0</p>
       </div>
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition transform hover:scale-105 duration-300">
         <h2 class="text-xl font-semibold text-[var(--emerald)] mb-2">Registered Users</h2>
-        <p class="text-3xl font-bold">248</p>
+        <p class="text-3xl font-bold">1</p>
       </div>
+    </div>
+
+    <!-- Sales details -->
+    
+    <div class="bg-white p-6 rounded-xl shadow mb-8 transition transform hover:scale-105 duration-300">
+    <h3 class="text-3xl font-bold text-[var(--emerald)] mb-4">Sales Overview</h3>
+    <canvas id="salesChart" height="100"></canvas>
     </div>
 
     <!-- Management Sections -->
     <div class="grid md:grid-cols-2 gap-10 mb-10">
-      <div class="bg-white p-6 rounded-xl shadow">
+      <div class="bg-white p-6 rounded-xl shadow transition transform hover:scale-105 duration-300">
         <h3 class="text-2xl font-bold text-[var(--tumeric)] mb-4">Product Management</h3>
         <ul class="space-y-2 text-[var(--grey2)]">
           <li>- Add new products</li>
-          <li>- Edit or delete existing products</li>
-          <li>- Manage categories and collections</li>
+          <li>- Edit existing products</li>
+          <li>- Delete Products</li>
         </ul>
-        <a href="#" class="inline-block mt-4 bg-[var(--emerald)] text-white px-4 py-2 rounded hover:bg-[var(--green2)] transition">Go to Products</a>
+        <a href="{{route ('spice.index')}}" class="inline-block mt-4 bg-[var(--emerald)] text-white px-4 py-2 rounded hover:bg-[var(--green2)] font-bold transition-transform transform hover:scale-105 duration-300">Take me there!</a>
       </div>
 
-      <div class="bg-white p-6 rounded-xl shadow">
+      <div class="bg-white p-6 rounded-xl shadow transition transform hover:scale-105 duration-300">
         <h3 class="text-2xl font-bold text-[var(--tumeric)] mb-4">Order Management</h3>
         <ul class="space-y-2 text-[var(--grey2)]">
           <li>- View and update order status</li>
           <li>- Process return requests</li>
           <li>- Print invoices or receipts</li>
         </ul>
-        <a href="#" class="inline-block mt-4 bg-[var(--emerald)] text-white px-4 py-2 rounded hover:bg-[var(--green2)] transition">Manage Orders</a>
+        <a href="#" class="inline-block mt-4 bg-[var(--emerald)] text-white px-4 py-2 rounded hover:bg-[var(--green2)] font-bold transition-transform transform hover:scale-105 duration-300">Manage Orders</a>
       </div>
-
-      <div class="bg-white p-6 rounded-xl shadow">
-        <h3 class="text-2xl font-bold text-[var(--tumeric)] mb-4">User Management</h3>
-        <ul class="space-y-2 text-[var(--grey2)]">
-          <li>- View user accounts</li>
-          <li>- Ban or promote users</li>
-          <li>- Assign roles (buyer, admin, seller)</li>
-        </ul>
-        <a href="#" class="inline-block mt-4 bg-[var(--emerald)] text-white px-4 py-2 rounded hover:bg-[var(--green2)] transition">Manage Users</a>
-      </div>
-
-      <div class="bg-white p-6 rounded-xl shadow">
-        <h3 class="text-2xl font-bold text-[var(--tumeric)] mb-4">Review Moderation</h3>
-        <ul class="space-y-2 text-[var(--grey2)]">
-          <li>- Approve or delete product reviews</li>
-          <li>- Flag spam or abusive content</li>
-        </ul>
-        <a href="#" class="inline-block mt-4 bg-[var(--emerald)] text-white px-4 py-2 rounded hover:bg-[var(--green2)] transition">Moderate Reviews</a>
-      </div>
-    </div>
-
-    <!-- Sales details -->
-    
-    <div class="bg-white p-6 rounded-xl shadow mb-8">
-    <h3 class="text-3xl font-bold text-[var(--emerald)] mb-4">Sales Overview</h3>
-    <canvas id="salesChart" height="100"></canvas>
-    </div>
 
   </main>
 

@@ -70,11 +70,11 @@
                 </div>
                 <p class="text-sm text-gray-600 mb-4">Shipping and taxes calculated at checkout.</p>
                 <div class="flex flex-col sm:flex-row justify-between gap-4">
-                    <a href="{{ url('checkout') }}" class="flex-1 text-center px-8 py-3 bg-[var(--grey2)] text-white font-semibold rounded-lg hover:bg-[var(--grey2)]/80 transition-colors">
+                    <a href="{{ url('products') }}" class="flex-1 text-center px-8 py-3 bg-[var(--grey2)] text-white font-semibold rounded-lg hover:bg-[var(--grey2)]/80 transition-colors">
                         ← Continue Shopping
                     </a>
                     <button class="flex-1 px-8 py-3 bg-[var(--emerald)] text-white font-semibold rounded-lg hover:bg-[var(--emerald)]/90 transition-colors">
-                        Proceed to Checkout →
+                        Proceed to Checkout → 
                     </button>
                 </div>
             </div>

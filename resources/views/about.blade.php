@@ -26,7 +26,7 @@
       <span class="text-2xl sm:text-3xl tracking-wider font-serif font-bold">𝕲𝖔𝖑𝖉𝕾𝖕𝖎𝖈𝖊</span>
     </div>
     <div class="flex space-x-6 text-sm uppercase">
-      <a href="{{ url('/home') }}" class="font-bold hover:text-[var(--emerald)] my-5">Home</a>
+      <a href="{{ url('/') }}" class="font-bold hover:text-[var(--emerald)] my-5">Home</a>
       <a href="{{ url('/about') }}" class="font-bold hover:text-[var(--emerald)] my-5">About</a>
       <a href="{{ url('/products') }}" class="font-bold hover:text-[var(--emerald)] my-5">Products</a>
     </div>
