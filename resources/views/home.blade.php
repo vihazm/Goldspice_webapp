@@ -74,8 +74,8 @@
       <div class="relative z-10 max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
 
         <div class="bg-white border-4 border-[var(--tumeric)] rounded-2xl p-8 shadow-lg flex flex-col text-left transition-transform transform hover:scale-105 duration-300">
-          <h3 class="text-2xl font-serif font-bold mb-3 text-[var(--tumeric)]">Join as a Goldspice member</h3>
-          <p class="text-black mb-4">Sign up as a member to purchase, access your own cart and many more!</p>
+          <h3 class="text-2xl font-serif font-bold mb-3 text-[var(--tumeric)]">Create a GoldSpice account!</h3>
+          <p class="text-black mb-4">Register your very own account now to access the cart, testimonials and more!</p>
           <a href="{{ url('/register') }}" class="inline-block bg-[var(--tumeric)] text-black text-md font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-[var(--emerald)] hover:text-white transition transition-transform transform hover:scale-105 duration-300">Register →</a>
         </div>
 

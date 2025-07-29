@@ -32,7 +32,18 @@ Route::get('/checkout', function () {
     return view('checkout');
 });
 
+Route::get('/payment', function () {
+    return view('payment');
+});
 
+Route::get('/orderconfirmation', function () {
+    return view('orderconfirmation');
+});
+
+
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('admin.admin');

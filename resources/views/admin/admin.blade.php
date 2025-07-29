@@ -22,6 +22,50 @@
     body {
       font-family: 'Merriweather', serif;
     }
+
+    /* Custom styling for the dropdown button from dashboard.blade.php */
+    .dropdown-button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px; /* Full rounded */
+        background-color: white;
+        color: var(--emerald);
+        font-weight: 700;
+        transition: all 0.3s ease;
+        border: 2px solid var(--emerald);
+    }
+    .dropdown-button:hover {
+        background-color: var(--yellowdark);
+        color: black;
+        border-color: black;
+        transform: scale(1.05);
+    }
+    .dropdown-menu {
+        position: absolute;
+        right: 0;
+        top: 100%; /* Position below the button */
+        margin-top: 0.5rem;
+        background-color: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 60; /* Higher than nav */
+        min-width: 120px;
+        overflow: hidden; /* Ensures rounded corners on children */
+    }
+    .dropdown-menu a {
+        display: block;
+        padding: 0.75rem 1rem;
+        color: #333;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+    }
+    .dropdown-menu a:hover {
+        background-color: var(--grey); /* Using a common grey for hover */
+        color: var(--emerald);
+    }
   </style>
   <link href="https://fonts.googleapis.com/css?family=Merriweather:700,400&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -41,10 +85,10 @@
     <span class="text-white text-2xl sm:text-3xl tracking-wider font-serif font-bold">𝕲𝖔𝖑𝖉𝕾𝖕𝖎𝖈𝖊</span>
   </div>
 
-  <div class="flex space-x-6 text-sm text-white uppercase">
+  <div class="flex space-x-6 text-sm text-white uppercase items-center">
+    <!-- Existing Users Dropdown -->
     <div class="relative">
       <input type="checkbox" id="manageDropdownToggle" class="hidden peer">
-
       <label for="manageDropdownToggle" class="text-white font-bold hover:text-gray-300 cursor-pointer focus:outline-none py-2 px-3 rounded inline-block transition transform hover:scale-105 duration-300">
         Users <span class="ml-1 text-xs">&#9660;</span> </label>
 
@@ -57,12 +101,28 @@
       </div>
     </div>
 
-    <form method="POST" action="{{ route('logout')}}">
-      @csrf
-      <button type="submit" class="inline-block bg-[var(--red1)] text-white px-4 py-2 rounded transition transform hover:scale-105 duration-300">
-        Logout
-      </button>
-    </form>
+    <!-- User Dropdown (Profile and Logout) -->
+    @auth
+      <div class="relative ml-4">
+        <button id="user-menu-button" class="dropdown-button focus:outline-none">
+          <span>{{ Auth::user()->name }}</span>
+          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div id="user-dropdown-menu" class="dropdown-menu hidden">
+          <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+          <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <a href="{{ route('logout') }}" 
+                 onclick="event.preventDefault(); this.closest('form').submit();"
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Log Out
+              </a>
+          </form>
+        </div>
+      </div>
+    @endauth
   </div>
 </nav>
 
@@ -127,7 +187,7 @@
     <div class="relative z-10 max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
         <div class="flex flex-col items-center sm:items-start space-y-2">
             <div class="flex items-center space-x-3">
-                <img src="{{ asset('images/Goldspice4.png') }}" alt="GoldSpice Logo" class="my-8 w-16 h-16" />
+                <img src="{{ asset('images/GoldSpice4.png') }}" alt="GoldSpice Logo" class="my-8 w-16 h-16" />
                 <span class="text-white text-lg font-semibold">GoldSpice</span>
             </div>
             <div class="mt-2 text-left">
@@ -187,7 +247,27 @@
       }
     }
   });
+
+  // Dropdown toggle logic for user menu
+  document.addEventListener('DOMContentLoaded', () => {
+    const userMenuButton = document.getElementById('user-menu-button');
+    const userDropdownMenu = document.getElementById('user-dropdown-menu');
+
+    if (userMenuButton && userDropdownMenu) {
+      userMenuButton.addEventListener('click', () => {
+        userDropdownMenu.classList.toggle('hidden');
+      });
+
+      // Close dropdown if clicked outside
+      document.addEventListener('click', (event) => {
+        if (!userMenuButton.contains(event.target) && !userDropdownMenu.contains(event.target)) {
+          userDropdownMenu.classList.add('hidden');
+        }
+      });
+    }
+  });
 </script>
 
 </body>
 </html>
+�
