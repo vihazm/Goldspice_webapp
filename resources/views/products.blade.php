@@ -55,17 +55,12 @@
       </p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-
-    <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800"
-      data-product-id="cinnamon-powder"
-      data-product-name="Cinnamon Powder"
-      data-product-price="550.00"
-      data-product-image="{{ asset('images/cinnamonp.png') }}"
-      data-product-pack="50g pack">
-      <img src="{{ asset('images/cinnamonp.png') }}" alt="cinnamon Powder" class="w-40 h-40 object-cover rounded-md mb-4"/>
-      <h3 class="text-xl font-semibold mb-2">Cinnamon Powder</h3>
-      <p class="text-sm text-gray-600 mb-4">50g pack</p>
-      <p class="text-lg font-bold text-black mb-4">Rs. 550.00</p>
+    @foreach($spices as $product)
+    <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800">
+      <img src="{{ asset('storage/' .$product->imagelink ) }}" alt="{{$product->name}}" class="w-40 h-40 object-cover rounded-md mb-4"/>
+      <h3 class="text-xl font-semibold mb-2">{{$product->name}}</h3>
+      <p class="text-sm text-gray-600 mb-4">{{$product->packsize}}g pack</p>
+      <p class="text-lg font-bold text-black mb-4">Rs.{{$product->price}}</p>
       <div class="flex items-center space-x-3 mb-4">
         <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
         <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
@@ -73,185 +68,9 @@
       </div>
       <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
     </div>
-        <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800"
-          data-product-id="red-chilli-powder"
-          data-product-name="Red Chilli Powder"
-          data-product-price="590.00"
-          data-product-image="{{ asset('images/chillipowder.png') }}"
-          data-product-pack="50g pack">
-          <img src="{{ asset('images/chillipowder.png') }}" alt="Red Chilli Powder" class="w-40 h-40 object-cover rounded-md mb-4"/>
-          <h3 class="text-xl font-semibold mb-2">Red Chilli Powder</h3>
-          <p class="text-sm text-gray-600 mb-4">50g pack</p>
-          <p class="text-lg font-bold text-black mb-4">Rs. 590.00</p>
-          <div class="flex items-center space-x-3 mb-4">
-            <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
-            <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
-            <button class="quantity-plus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--green)] transition-colors">+</button>
-          </div>
-          <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
-        </div>
+    @endforeach
 
-        <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800"
-          data-product-id="red-chilli-flakes"
-          data-product-name="Red Chilli Flakes"
-          data-product-price="530.00"
-          data-product-image="{{ asset('images/chilliflakes.png') }}"
-          data-product-pack="50g pack">
-          <img src="{{ asset('images/chilliflakes.png') }}" alt="chilli flakes" class="w-40 h-40 object-cover rounded-md mb-4"/>
-          <h3 class="text-xl font-semibold mb-2">Red Chilli Flakes</h3>
-          <p class="text-sm text-gray-600 mb-4">50g pack</p>
-          <p class="text-lg font-bold text-black mb-4">Rs. 530.00</p>
-          <div class="flex items-center space-x-3 mb-4">
-            <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
-            <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
-            <button class="quantity-plus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--green)] transition-colors">+</button>
-          </div>
-          <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
-        </div>
-
-        <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800"
-          data-product-id="black-pepper-powder"
-          data-product-name="Black Pepper (Powder)"
-          data-product-price="780.00"
-          data-product-image="{{ asset('images/blackpepper.png') }}"
-          data-product-pack="50g pack">
-          <img src="{{ asset('images/blackpepper.png') }}" alt="Black Pepper" class="w-40 h-40 object-cover rounded-md mb-4"/>
-          <h3 class="text-xl font-semibold mb-2">Black Pepper (Powder)</h3>
-          <p class="text-sm text-gray-600 mb-4">50g pack</p>
-          <p class="text-lg font-bold text-black mb-4">Rs. 780.00</p>
-          <div class="flex items-center space-x-3 mb-4">
-            <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
-            <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
-            <button class="quantity-plus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--green)] transition-colors">+</button>
-          </div>
-          <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
-        </div>
-
-        <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800"
-          data-product-id="dried-lemongrass"
-          data-product-name="Dried Lemongrass"
-          data-product-price="480.00"
-          data-product-image="{{ asset('images/lemongrass.png') }}"
-          data-product-pack="50g pack">
-          <img src="{{ asset('images/lemongrass.png') }}" alt="dried lemongrass" class="w-40 h-40 object-cover rounded-md mb-4"/>
-          <h3 class="text-xl font-semibold mb-2">Dried Lemongrass</h3>
-          <p class="text-sm text-gray-600 mb-4">50g pack</p>
-          <p class="text-lg font-bold text-black mb-4">Rs. 480.00</p>
-          <div class="flex items-center space-x-3 mb-4">
-            <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
-            <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
-            <button class="quantity-plus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--green)] transition-colors">+</button>
-          </div>
-          <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
-        </div>
-
-        <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800"
-          data-product-id="cardamom"
-          data-product-name="Cardamom"
-          data-product-price="1050.00"
-          data-product-image="{{ asset('images/cardamomGS.png') }}"
-          data-product-pack="30g jar">
-          <img src="{{ asset('images/cardamomGS.png') }}" alt="Cardamom" class="w-40 h-40 object-cover rounded-md mb-4"/>
-          <h3 class="text-xl font-semibold mb-2">Cardamom</h3>
-          <p class="text-sm text-gray-600 mb-4">30g jar</p>
-          <p class="text-lg font-bold text-black mb-4">Rs. 1050.00</p>
-          <div class="flex items-center space-x-3 mb-4">
-            <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
-            <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
-            <button class="quantity-plus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--green)] transition-colors">+</button>
-          </div>
-          <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
-        </div>
-
-        <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transform hover:scale-105 duration-300 text-gray-800"
-          data-product-id="island-flavours-collection"
-          data-product-name="Island Flavours Collection"
-          data-product-price="1800.00"
-          data-product-image="{{ asset('images/spiceset1.png') }}"
-          data-product-pack="75g x 4 pack">
-          <img src="{{ asset('images/spiceset1.png') }}" alt="spiceset1" class="w-40 h-40 object-cover rounded-md mb-4"/>
-          <h3 class="text-xl font-semibold mb-2">Island Flavours Collection</h3>
-          <p class="text-sm text-gray-600 mb-4">75g x 4 pack</p>
-          <p class="text-lg font-bold text-black mb-4">Rs. 1800.00</p>
-          <div class="flex items-center space-x-3 mb-4">
-            <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
-            <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
-            <button class="quantity-plus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--green)] transition-colors">+</button>
-          </div>
-          <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
-        </div>
-
-        <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800"
-          data-product-id="heritage-curries-collection"
-          data-product-name="Heritage Curries Collection"
-          data-product-price="1950.00"
-          data-product-image="{{ asset('images/spiceset2.png') }}"
-          data-product-pack="75g x 4 pack">
-          <img src="{{ asset('images/spiceset2.png') }}" alt="spiceset2" class="w-40 h-40 object-cover rounded-md mb-4"/>
-          <h3 class="text-xl font-semibold mb-2">Heritage Curries Collection</h3>
-          <p class="text-sm text-gray-600 mb-4">75g x 4 pack</p>
-          <p class="text-lg font-bold text-black mb-4">Rs. 1950.00</p>
-          <div class="flex items-center space-x-3 mb-4">
-            <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
-            <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
-            <button class="quantity-plus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--green)] transition-colors">+</button>
-          </div>
-          <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
-        </div>
-
-        <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transform hover:scale-105 duration-300 text-gray-800"
-          data-product-id="barbecue-amigos-collection"
-          data-product-name="Barbecue Amigos Collection"
-          data-product-price="1900.00"
-          data-product-image="{{ asset('images/bbqmix.png') }}"
-          data-product-pack="75g x 4 pack">
-          <img src="{{ asset('images/bbqmix.png') }}" alt="spiceset3" class="w-40 h-40 object-cover rounded-md mb-4"/>
-          <h3 class="text-xl font-semibold mb-2">Barbecue Amigos Collection</h3>
-          <p class="text-sm text-gray-600 mb-4">75g x 4 pack</p>
-          <p class="text-lg font-bold text-black mb-4">Rs. 1900.00</p>
-          <div class="flex items-center space-x-3 mb-4">
-            <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
-            <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
-            <button class="quantity-plus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--green)] transition-colors">+</button>
-          </div>
-          <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
-        </div>
-
-        <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800"
-          data-product-id="goldspice-deluxe-imperial"
-          data-product-name="GoldSpice Deluxe (Imperial Edition)"
-          data-product-price="3650.00"
-          data-product-image="{{ asset('images/imperial1.5.png') }}"
-          data-product-pack="75g x 3 pack">
-          <img src="{{ asset('images/imperial1.5.png') }}" alt="deluxe spiceset 1" class="w-40 h-40 object-cover rounded-md mb-4"/>
-          <h3 class="text-xl font-semibold mb-2">GoldSpice Deluxe (Imperial Edition)</h3>
-          <p class="text-sm text-gray-600 mb-4">75g x 3 bottles</p>
-          <p class="text-lg font-bold text-black mb-4">Rs. 3650.00</p>
-          <div class="flex items-center space-x-3 mb-4">
-            <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
-            <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
-            <button class="quantity-plus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--green)] transition-colors">+</button>
-          </div>
-          <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
-        </div>
-
-        <div class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800"
-          data-product-id="goldspice-deluxe-exotic"
-          data-product-name="GoldSpice Deluxe (Exotic Edition)"
-          data-product-price="3250.00"
-          data-product-image="{{ asset('images/exoticGS.png') }}"
-          data-product-pack="75g x 3 pack">
-          <img src="{{ asset('images/exoticGS.png') }}" alt="deluxe spiceset 1" class="w-40 h-40 object-cover rounded-md mb-4"/>
-          <h3 class="text-xl font-semibold mb-2">GoldSpice Deluxe (Exotic Edition) </h3>
-          <p class="text-sm text-gray-600 mb-4">75g x 3 bottles</p>
-          <p class="text-lg font-bold text-black mb-4">Rs. 3250.00</p>
-          <div class="flex items-center space-x-3 mb-4">
-            <button class="quantity-minus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--red)] transition-colors">-</button>
-            <span class="quantity-display text-lg font-semibold w-8 text-center">1</span>
-            <button class="quantity-plus px-4 py-2 rounded-full bg-[var(--grey2)] text-white hover:bg-[var(--green)] transition-colors">+</button>
-          </div>
-          <button class="add-to-cart-btn bg-[var(--emerald)] text-white px-8 py-3 rounded-lg hover:bg-[var(--emerald)]/90 transition-colors text-sm font-semibold">Add to Cart</button>
-        </div>
+        
 
       </div>
     </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Spices;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\admin\SpiceController;
@@ -13,7 +14,8 @@ Route::get('/about', function () {
 });
 
 Route::get('/products', function () {
-    return view('products');
+    $spices = Spices::all();
+    return view('products',compact('spices'));
 });
 
 Route::get('/deluxe', function () {
