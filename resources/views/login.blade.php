@@ -36,7 +36,7 @@
     <!-- Navigation Bar (similar to index.html for consistency) -->
     <nav class="absolute top-0 left-0 right-0 flex justify-between items-center px-8 py-6 z-50">
       <div class="flex items-center space-x-3">
-        <img src="{{ asset('images/GoldSpice4.png') }}" alt="Logo" class="w-14 h-14 sm:w-16 sm:h-16" />
+        <img src="{{ asset('images/goldspice5.png') }}" alt="Logo" class="w-14 h-14 sm:w-16 sm:h-16" />
         <span class="text-2xl sm:text-3xl tracking-wider font-serif font-bold">𝕲𝖔𝖑𝖉𝕾𝖕𝖎𝖈𝖊</span>
       </div>
       
