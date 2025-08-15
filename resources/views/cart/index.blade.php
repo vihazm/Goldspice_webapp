@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!-- Added CSRF token for secure AJAX requests -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>GoldSpice - Products</title>
+    <title>Your Cart - GoldSpice</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:700,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --yellow: #ffee39;
@@ -21,26 +20,17 @@
         body {
             font-family: 'Merriweather', serif;
         }
-        .quantity-input {
-            -moz-appearance: textfield; /* Firefox */
-        }
-        .quantity-input::-webkit-outer-spin-button,
-        .quantity-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
     </style>
-    <link href="https://fonts.googleapis.com/css?family=Merriweather:700,400&display=swap" rel="stylesheet">
 </head>
 <body class="bg-black text-white min-h-screen flex flex-col relative">
 
-    <!-- Background images -->
+    <!-- Background -->
     <div class="fixed inset-0 z-0">
         <img src="{{ asset('images/greensBG.jpg') }}" alt="Spice Background" class="w-full h-full object-cover opacity-70"/>
         <div class="absolute inset-0 bg-black/60"></div>
     </div>
 
-    <!-- Navigation Bar -->
+    <!-- Navbar -->
     <nav class="relative z-20 flex justify-between items-center px-8 py-6 bg-black/30 backdrop-blur-sm sticky top-0">
         <div class="flex items-center space-x-3">
             <img src="{{ asset('images/goldspice5.png') }}" alt="Logo" class="w-14 h-14 sm:w-16 sm:h-16" />
@@ -50,70 +40,77 @@
             <a href="{{ url('/') }}" class="font-bold hover:text-[var(--emerald)]">Home</a>
             <a href="{{ url('about') }}" class="font-bold hover:text-[var(--emerald)]">About</a>
             <a href="{{ url('products') }}" class="font-bold hover:text-[var(--emerald)]">Products</a>
-            <a href="{{ url('cart') }}" id="cart-icon" class="font-bold hover:text-[var(--emerald)] relative">
-               
-            </a>
+            <a href="{{ url('cart') }}" class="font-bold hover:text-[var(--emerald)]">Cart</a>
         </div>
     </nav>
 
-    <main class="relative z-10 flex-grow py-16 px-4 text-white">
-        <div class="max-w-7xl mx-auto">
-            <h1 class="text-4xl sm:text-5xl font-serif font-bold text-center mb-12 text-[var(--tumeric)]">Explore our Products</h1>
-            <p class="text-center max-w-3xl mx-auto text-lg text-gray-200 mb-12">
-                An exquisite selection of authentic Sri Lankan spices. Each product embodies our commitment to quality, purity, and the rich culinary heritage of our island.
-            </p>
+    <!-- Cart Content -->
+    <main class="relative z-10 flex-grow py-16 px-4 text-black">
+        <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+            <h2 class="text-3xl font-bold mb-6">Your Cart</h2>
 
-            <!-- Grid of products -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-    @foreach($spices as $product)
-    <form action="{{ route('cart.add') }}" method="POST" class="bg-white border-4 border-[var(--emerald)] rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300 text-gray-800 add-to-cart-form">
-        @csrf
-        <img src="{{ asset('storage/' . $product->imagelink) }}" alt="{{ $product->name }}" class="w-40 h-40 object-cover rounded-md mb-4"/>
-        <h3 class="text-xl font-semibold mb-2">{{ $product->name }}</h3>
-        <p class="text-sm text-gray-600 mb-4">{{ $product->packsize }}g pack</p>
-        <p class="text-lg font-bold text-black mb-4">Rs.{{ number_format($product->price, 2) }}</p>
+            @if($cartItems->count() > 0)
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-[var(--emerald)] text-white">
+                            <th class="p-3">Product</th>
+                            <th class="p-3">Quantity</th>
+                            <th class="p-3">Price</th>
+                            <th class="p-3">Total</th>
+                            <th class="p-3"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $grandTotal = 0;
+                        @endphp
+                        @foreach($cartItems as $item)
+                        @php
+                            $itemTotal = $item->spice->price * $item->quantity;
+                            $grandTotal += $itemTotal;
+                        @endphp
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3">{{ $item->spice->name }}</td>
+                            <td class="p-3">{{ $item->quantity }}</td>
+                            <td class="p-3">Rs.{{ number_format($item->spice->price, 2) }}</td>
+                            <td class="p-3">Rs.{{ number_format($itemTotal, 2) }}</td>
+                            <td class="p-3">
+                                <form action="{{ route('cart.remove', $item->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="text-red-500 hover:text-red-700">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                        <tr class="font-bold bg-gray-100">
+                            <td colspan="3" class="p-3 text-right">Grand Total:</td>
+                            <td class="p-3">Rs.{{ number_format($grandTotal, 2) }}</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-       
+                <!-- Action Buttons -->
+                <div class="flex justify-between items-center mt-6">
+                    <a href="{{ url('products') }}" class="px-4 py-2 bg-gray-300 text-black font-semibold rounded hover:bg-gray-400">
+                        ⬅ Back to Products
+                    </a>
+                    <a href="{{ route('checkout') }}" class="px-4 py-2 bg-[var(--emerald)] text-white font-semibold rounded hover:bg-green-600">
+                        Proceed to Checkout ➡
+                    </a>
+                </div>
 
-        <!-- Hidden inputs for product data -->
-        <input type="hidden" name="product_id" value="{{ $product->id }}">
-        <input type="hidden" name="name" value="{{ $product->name }}">
-        <input type="hidden" name="price" value="{{ $product->price }}">
-        <input type="hidden" name="imagelink" value="{{ $product->imagelink }}">
-
-        <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
-    @csrf
-    <input type="hidden" name="spice_id" value="{{ $product->id }}">
-    <input type="number" name="quantity" value="1" min="1">
-    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Add to Cart</button>
-</form>
-
-
-
-    </form>
-    @endforeach
-</div>
+            @else
+                <p class="text-gray-600">Your cart is empty.</p>
+                <div class="mt-4">
+                    <a href="{{ url('products') }}" class="px-4 py-2 bg-[var(--emerald)] text-white font-semibold rounded hover:bg-green-600">
+                        Browse Products
+                    </a>
+                </div>
+            @endif
         </div>
     </main>
-
-    <!-- Call to action -->
-    <section class="relative z-10 bg-white py-16 px-4 text-gray-800">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-4xl font-bold text-black mb-6">Wanna know more about our Specials?</h2>
-            <p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">
-                We do more than "just spices". We design Spice sets that will add flavour to various situations and also a few Deluxe Editions for gifting or personal enjoyment.
-            </p>
-            <div class="flex flex-wrap justify-center gap-6">
-                <a href="{{ url('deluxe') }}" class="px-8 py-3 bg-white text-[var(--emerald)] font-bold border-4 border-[var(--emerald)] rounded-lg transition-transform transform hover:scale-105 duration-300">Deluxe Editions →</a>
-                <a href="{{ url('collections') }}" class="px-8 py-3 bg-white text-[var(--tumeric)] font-bold border-4 border-[var(--tumeric)] rounded-lg transition-transform transform hover:scale-105 duration-300">Collections →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Cart notification -->
-    <div id="cart-notification" class="fixed bottom-4 right-4 bg-[var(--emerald)] text-white px-6 py-3 rounded-lg shadow-xl z-50 opacity-0 transform translate-y-full pointer-events-none transition-all duration-300">
-        Cart Updated!
-    </div>
 
     <!-- Footer -->
     <footer class="relative z-10 bg-black border-t border-gray-800 text-gray-400 text-xs sm:text-sm py-6 px-4 sm:px-8">
@@ -154,11 +151,5 @@
             </div>
         </div>
     </footer>
-
-    <!-- JavaScript -->
-    <script>
-      
-
-    </script>
 </body>
 </html>

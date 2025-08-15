@@ -11,42 +11,34 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
+    //Creating a new login upon request
     public function create(): View
     {
         return view('auth.login');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
+    //Initiating an oncoming authentication request
     public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+{
+    $request->authenticate();
 
-        $request->session()->regenerate();
+    $request->session()->regenerate();//Regenerating session ID 
 
-        $user = Auth::user();
-
-        if ($user->hasRole('admin')) {
-            return redirect('/dashboard');
-        
-    }
-        return redirect('/home');
+    if (auth()->user()->hasRole('admin')) {
+        return redirect()->intended('/dashboard'); //If user has the role admin he goes to the dashboard.
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
+    return redirect()->intended('/'); //Users go to the homepage
+}
+    
+    //Destroy an authenticated session upon request.
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+        $request->session()->invalidate(); //Removes all session data by invalidating the session
 
-        $request->session()->regenerateToken();
+        $request->session()->regenerateToken(); //Regenerates the CSRF token
 
         return redirect('/');
     }

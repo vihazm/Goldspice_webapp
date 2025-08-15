@@ -21,6 +21,7 @@
     body {
       font-family: 'Merriweather', serif;
     }
+    
   </style>
   <link href="https://fonts.googleapis.com/css?family=Merriweather:700,400&display=swap" rel="stylesheet">
 </head>
@@ -35,16 +36,53 @@
   <!-- Sticky Navbar above the background -->
   <nav class="sticky top-0 z-50 flex justify-between items-center px-8 py-6 bg-black/30 backdrop-blur-md">
     <div class="flex items-center space-x-3">
-      <img src="{{ asset('images/goldspice5.png') }}" alt="Logo" class="w-14 h-14 sm:w-16 sm:h-16" />
-      <span class="text-2xl sm:text-3xl tracking-wider font-serif font-bold">𝕲𝖔𝖑𝖉𝕾𝖕𝖎𝖈𝖊</span>
+        <img src="{{ asset('images/goldspice5.png') }}" alt="Logo" class="w-14 h-14 sm:w-16 sm:h-16" />
+        <span class="text-2xl sm:text-3xl tracking-wider font-serif font-bold">𝕲𝖔𝖑𝖉𝕾𝖕𝖎𝖈𝖊</span>
     </div>
-    <div class="flex space-x-6 text-sm uppercase">
-      <a href="{{ url('/') }}" class="font-bold hover:text-[var(--emerald)] my-5">Home</a>
-      <a href="{{ url('/about') }}" class="font-bold hover:text-[var(--emerald)] my-5">About</a>
-      <a href="{{ url('/products') }}" class="font-bold hover:text-[var(--emerald)] my-5">Products</a>
-      <a href="{{ url('/login') }}" class="inline-block bg-white border-2 border-[var(--emerald)] font-bold text-[var(--emerald)] px-4 py-3 mx-2 my-2 rounded hover:bg-[var(--yellowdark)] hover:text-black hover:border-black transition transition-transform transform hover:scale-105 duration-300">Login</a>
+
+    <div class="flex space-x-6 text-sm uppercase items-center">
+        <a href="{{ url('/') }}" class="font-bold hover:text-[var(--emerald)] my-5">Home</a>
+        <a href="{{ url('/about') }}" class="font-bold hover:text-[var(--emerald)] my-5">About</a>
+        <a href="{{ url('/products') }}" class="font-bold hover:text-[var(--emerald)] my-5">Products</a>
+        <a href="{{ url('/orders') }}" class="font-bold hover:text-[var(--emerald)] my-5">Orders</a>
+
+        @if(Auth::check())
+            <!-- User Dropdown -->
+            <div class="relative ml-4">
+                <button id="user-menu-button" 
+                        class="flex items-center space-x-2 bg-white border-2 border-[var(--emerald)] font-bold text-[var(--emerald)] px-4 py-3 rounded hover:bg-[var(--yellowdark)] hover:text-black hover:border-black transition duration-300"
+                        aria-expanded="false">
+                    <span>{{ Auth::user()->name }}</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div id="user-dropdown-menu" 
+                     class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
+                    <a href="{{ url('/profile') }}" 
+                       class="block px-4 py-2 text-gray-700 hover:bg-[var(--emerald)] hover:text-white">
+                        Profile
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" 
+                                class="w-full text-left px-4 py-2 text-gray-700 hover:bg-red-500 hover:text-white">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+        @else
+            <!-- Login Button -->
+            <a href="{{ url('/login') }}" 
+               class="inline-block bg-white border-2 border-[var(--emerald)] font-bold text-[var(--emerald)] px-4 py-3 rounded hover:bg-[var(--yellowdark)] hover:text-black hover:border-black transition duration-300">
+                Login
+            </a>
+        @endif
     </div>
-  </nav>
+</nav>
 
   <!-- Main content -->
   <div class="relative z-10 w-full py-overflow-hidden">
@@ -227,6 +265,34 @@
         cartCountDisplay.textContent = totalItems;
       }
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const btn  = document.getElementById('user-menu-button');
+    const menu = document.getElementById('user-dropdown-menu');
+
+    if (btn && menu) {
+        function openMenu()  { menu.classList.remove('hidden'); btn.setAttribute('aria-expanded', 'true'); }
+        function closeMenu() { menu.classList.add('hidden');    btn.setAttribute('aria-expanded', 'false'); }
+        function toggleMenu(){ menu.classList.contains('hidden') ? openMenu() : closeMenu(); }
+
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
+        });
+    }
+});
   </script>
 
 </body>

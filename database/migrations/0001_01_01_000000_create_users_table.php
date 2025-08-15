@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    //instructions to make changes to schema
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
@@ -37,9 +35,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    //instruction for reversing what up() did
     public function down(): void
     {
         Schema::dropIfExists('users');
